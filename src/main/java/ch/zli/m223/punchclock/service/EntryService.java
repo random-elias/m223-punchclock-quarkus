@@ -1,16 +1,11 @@
 package ch.zli.m223.punchclock.service;
 
-import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
-
-import com.fasterxml.jackson.annotation.JsonTypeInfo.Id;
 
 import ch.zli.m223.punchclock.domain.Entry;
 
@@ -38,8 +33,8 @@ public class EntryService {
     @Transactional
     public Entry updateEntry(Long id){
         Entry entry = entityManager.find(Entry.class, id);
-        entityManager.merge(entry);
-        return entry;
+        Entry newEntry = entityManager.merge(entry);
+        return newEntry;
     }
     
     @SuppressWarnings("unchecked")

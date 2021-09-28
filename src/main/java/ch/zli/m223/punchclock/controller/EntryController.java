@@ -72,7 +72,7 @@ public class EntryController {
 
     @PUT
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("update/{id}")
+    @Path("/{id}")
     public Entry update(@PathParam("id") Long id) {
         return entryService.updateEntry(id);
     }
