@@ -79,6 +79,18 @@
       <artifactId>rest-assured</artifactId>
       <scope>test</scope>
     </dependency>
+  
+    <dependency>
+      <groupId>org.mongodb</groupId>
+      <artifactId>mongo-java-driver</artifactId>
+      <version>3.11.0</version>
+    </dependency>
+  
+    <dependency>
+      <groupId>com.google.appengine</groupId>
+      <artifactId>appengine-api-1.0-sdk</artifactId>
+      <version>1.9.76</version>
+    </dependency>
   </dependencies>
   <build>
     <plugins>

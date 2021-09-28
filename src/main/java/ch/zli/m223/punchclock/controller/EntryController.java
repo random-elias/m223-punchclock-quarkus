@@ -1,17 +1,27 @@
 package ch.zli.m223.punchclock.controller;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
+import java.util.LinkedHashMap;
 
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import javax.persistence.Id;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
+import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
+
+import com.google.appengine.repackaged.com.google.api.client.util.Base64;
 
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
@@ -49,4 +59,21 @@ public class EntryController {
         return entryService.deleteEntry(id);
     }
 
+    /*Attempt to pass Time wihthin URL
+    @PUT
+    @Produces(MediaType.APPLICATION_JSON)
+    @Path("update/{id}/{checkin}/{checkout}")
+    public Entry update(@PathParam("id") Long id, @PathParam("checkin") String checkin, @PathParam("checkout") String checkout) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss");
+        LocalDateTime parsedCheckin  = LocalDateTime.parse(checkin, formatter);
+        LocalDateTime parsedCheckout  = LocalDateTime.parse(checkout, formatter);
+        return entryService.updateEntry(id, parsedCheckin, parsedCheckout);
+    } */
+
+    @PUT
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Path("update/{id}")
+    public Entry update(@PathParam("id") Long id) {
+        return entryService.updateEntry(id);
+    }
 }

@@ -1,6 +1,8 @@
 package ch.zli.m223.punchclock.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Set;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
@@ -16,7 +18,6 @@ import ch.zli.m223.punchclock.domain.Entry;
 public class EntryService {
     @Inject
     private EntityManager entityManager;
-    private Long id;
 
     public EntryService() {
     }
@@ -34,16 +35,16 @@ public class EntryService {
         return entry;
     }
 
-    //@Transactional
-    //public Entry updateEntry(){
-    //
-    //}
+    @Transactional
+    public Entry updateEntry(Long id){
+        Entry entry = entityManager.find(Entry.class, id);
+        entityManager.merge(entry);
+        return entry;
+    }
     
     @SuppressWarnings("unchecked")
-    List<Entry> findAll() {
+    public List<Entry> findAll() {
         var query = entityManager.createQuery("FROM Entry");
         return query.getResultList();
     }
-
-
 }

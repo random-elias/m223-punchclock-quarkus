@@ -12,7 +12,7 @@ public class Entry {
 
     @Column(nullable = false)
     private LocalDateTime checkIn;
-
+    
     @Column(nullable = false)
     private LocalDateTime checkOut;
 
