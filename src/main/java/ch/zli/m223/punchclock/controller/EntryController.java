@@ -1,31 +1,17 @@
 package ch.zli.m223.punchclock.controller;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.util.Collections;
 import java.util.List;
-import java.util.Set;
-import java.util.LinkedHashMap;
-
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.Id;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
-import javax.ws.rs.PATCH;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
-
-import com.google.appengine.repackaged.com.google.api.client.util.Base64;
-
 import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
-
 import ch.zli.m223.punchclock.domain.Entry;
 import ch.zli.m223.punchclock.service.EntryService;
 
@@ -38,7 +24,7 @@ public class EntryController {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    @Operation(summary = "List all Entries", description = "")
+    @Operation(summary = "List all Entries", description = "Find all entries")
     public List<Entry> list() {
         return entryService.findAll();
     }
@@ -54,7 +40,8 @@ public class EntryController {
     @DELETE
     @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
-    @Path("/delete/{id}")
+    @Operation(summary = "Delete entry by id", description = "The entry with the given id will be deleted out of the h2 db.")
+    @Path("/{id}")
     public Entry delete(@PathParam("id") Long id) {
         return entryService.deleteEntry(id);
     }
@@ -71,7 +58,9 @@ public class EntryController {
     } */
 
     @PUT
+    @Produces(MediaType.APPLICATION_JSON)
     @Consumes(MediaType.APPLICATION_JSON)
+    @Operation(summary = "Edit entry by id", description = "The entry with the given id will be updated with the PUT-Method's body content and returned again")
     @Path("/{id}")
     public Entry update(@PathParam("id") Long id) {
         return entryService.updateEntry(id);

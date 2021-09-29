@@ -19,3 +19,15 @@ Datenquelle: jdbc:h2:mem:punchclock
 Benutzername: zli
 Passwort: zli
 
+#Beschreibung der Applikation
+Diese Applikation kann Zeieinträge kreieren, zusammen mit anderen Entities die mit den Entries im Backend verbunden sind (JPA ORM-Mapping).
+Am besten startet man die Applikation mit quarkus:dev
+
+#Beispieldatenskript
+Es gibt kein Skript welches Beispieldaten zur Verfügung stellt. Dies geht jeodch mit einem data.sql file im Resosurce folder.
+
+#Kommentare
+- Die Kardinalitäten im Fachklassendiagramm sind vertauscht, ausserdem sind die Kardinalitäen zwischen Entry und User komplett falsch (sollte 0..*, 1 sein). Wenn Ich das Projekt genau nach dem erstelle, wird
+das Projekt einfach falsch und nicht funktionsfähig, also habe Ich das Projekt nach den richtigen Kardinalitäten geschireben, des Projektes willen.
+  
+- Da die HTTP-Methods in meiner Schnittstelle (EntryController) alle mit @Operation Annotation beschrieben sind, wäre es redundant dort Kommentare zu schreiben
